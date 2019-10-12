@@ -5,3 +5,28 @@
 
 
 /* Footer Scoring Interface */
+
+#player-status-interface {
+    /* Bottome fixed positioning */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    /* proportions */
+    height: 3em;
+    /* colors borders & shading */
+    border-top: 1px solid #787878;
+}
+
+#player-status-interface #player-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#player-status .status-item {
+    flex-grow: 1;
+    text-align: center;
+    height: 1.5em;
+}
