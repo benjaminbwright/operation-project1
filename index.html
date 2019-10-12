@@ -7,12 +7,60 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Operation Project Numero Uno</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <h1>Team Mind Blown</h1>
-    <p>Charlie Frank Ben</p>
+    <div class="wrapper">
+        <div class="container-fluid">
+            <div class="jumbotron text-center">
+                <h1>Forbade</h1>
+                <p>Charlie, Frank, and Ben bring you the apocalypse.</p>
+            </div>
+        </div>
+        <div class="container">
+            <div id="choices">
+                <button class="choice-button">Choice</button>
+                <button class="choice-button">Choice</button>
+                <button class="choice-button">Choice</button>
+            </div>
+            <div id="player-status">
+                <div>Health: <span id="health">10</span></div>
+                <div>Hunger: <span id="hunger">0</span></div>
+                <div>Thirst: <span id="thirst">0</span></div>
+            </div>
+        </div>
+    </div>
 </body>
+<script src="index.js"></script>
+<script>
+    // Setup a player object
+    var player = {
+        health: 10,
+        hunger: 0,
+        thirst: 0
+    }
+
+    // Adjust points on location change
+    $('.choice-button').on('click', function() {
+        // subtract health if hunger or thirst are too high
+        if (player.hunger > 8) {
+            player.health--;
+        }
+        if (player.thirst > 8) {
+            player.health--;
+        }
+
+        // Default hunger and thirst updates
+        player.hunger++;
+        player.thirst += 2;
+
+        // Update display
+        $("#health").text(player.health);
+        $("#hunger").text(player.hunger);
+        $("#thirst").text(player.thirst);
+    });
+</script>
 
 </html>
