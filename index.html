@@ -6,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Operation Project Numero Uno</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -27,17 +25,19 @@
                 <button class="choice-button find-water">Find Water</button>
                 <button class="choice-button find-medicine">Find Medicine</button>
             </div>
-            <div id="player-status">
-                <div>Health: <span id="health">10</span></div>
-                <div>Hunger: <span id="hunger">0</span></div>
-                <div>Thirst: <span id="thirst">0</span></div>
-            </div>
+
         </div>
+        <footer id="player-status-interface">
+            <div id="player-status" class="container">
+                <div class="status-item">Health: <span id="health">10</span></div>
+                <div class="status-item">Hunger: <span id="hunger">0</span></div>
+                <div class="status-item">Thirst: <span id="thirst">0</span></div>
+            </div>
+        </footer>
     </div>
 </body>
 <script src="index.js"></script>
 <script>
-
     class DB {
         constructor() {
             this.storage = window.localStorage;
@@ -121,7 +121,7 @@
     }
 
     // Adjust points on location change
-    $('.choice-button').on('click', function () {
+    $('.choice-button').on('click', function() {
         // subtract health if hunger or thirst are too high
         if (player.hunger > 8) {
             player.health--;
