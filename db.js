@@ -41,14 +41,14 @@ class DB {
     let i = keys.length;
 
       while( i-- ) {
-        allKeys.push(this.get(keys[i]))
+        allKeys.push(this.getPlayer(keys[i]))
       }
 
     return allKeys;
   }
 
   allStorage() {
-    const storageObj = {}// Notice change here
+    const storageObj = {};
     const keys = Object.keys(this.storage)
     let i = keys.length;
 
