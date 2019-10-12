@@ -6,9 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Operation Project Numero Uno</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -35,6 +37,82 @@
 </body>
 <script src="index.js"></script>
 <script>
+
+    class DB {
+        constructor() {
+            this.storage = window.localStorage;
+            this.getPlayer = this.getPlayer.bind(this)
+            this.addPlayer = this.addPlayer.bind(this)
+            this.updatePlayer = this.updatePlayer.bind(this)
+            this.removePlayer = this.removePlayer.bind(this)
+            this.nuclearBomb = this.nuclearBomb.bind(this)
+        }
+
+        addPlayer(str, obj) {
+            if (this.storage.getItem(str)) {
+                console.log(`Player already exists!!`);
+            } else {
+                this.storage.setItem(str, JSON.stringify(obj))
+                console.log(`Player ${str} created`)
+            }
+        }
+
+        getPlayer(str) {
+            if (!this.storage.getItem(str)) {
+                console.log(`Player not found!`)
+            } else {
+                const player = JSON.parse(this.storage.getItem(str))
+                console.log(`player -->`, player)
+                return player
+            }
+        }
+
+        updatePlayer(str, obj) {
+            this.storage.removeItem(str);
+            this.storage.setItem(str, JSON.stringify(obj))
+            console.log(`update obj-->`, obj)
+            return obj;
+        }
+
+        removePlayer(str) {
+            this.storage.removeItem(str);
+        }
+
+        listAllPlayers() {
+            console.log(Object.keys(this.storage))
+            return Object.keys(this.storage)
+        }
+
+        listAllPlayerObjects() {
+            const allKeys = [];
+            const keys = Object.keys(this.storage);
+            let i = keys.length;
+
+            while (i--) {
+                allKeys.push(this.storage.getItem(keys[i]))
+            }
+            console.log(`allKeys-->`, allKeys)
+            return allKeys;
+        }
+
+        allStorage() {
+            const storageObj = {};
+            const keys = Object.keys(this.storage)
+            let i = keys.length;
+
+            while (i--) {
+                storageObj[keys[i]] = JSON.parse(this.storage.getItem(keys[i]));
+            }
+            console.log(`STORAGE OBJECT---->`, storageObj)
+            return storageObj;
+        }
+
+        nuclearBomb() {
+            this.storage.clear();
+        }
+    }
+
+
     // Setup a player object
     var player = {
         health: 10,
@@ -43,7 +121,7 @@
     }
 
     // Adjust points on location change
-    $('.choice-button').on('click', function() {
+    $('.choice-button').on('click', function () {
         // subtract health if hunger or thirst are too high
         if (player.hunger > 8) {
             player.health--;
