@@ -3,6 +3,23 @@
 
 /* Main page styles */
 
+.wrapper {
+    min-height: 100vh;
+    background: linear-gradient( rgba(216, 51, 0, 0.36), rgba(105, 168, 74, 0.43)), url(assets/img/nuclear-fallout.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.jumbotron {
+    background: transparent;
+    color: #fff;
+}
+
+.jumbotron h1 {
+    font-size: 5em;
+    font-family: 'Metal Mania', cursive;
+}
+
 
 /* Footer Scoring Interface */
 
@@ -16,6 +33,7 @@
     height: 3em;
     /* colors borders & shading */
     border-top: 1px solid #787878;
+    background: #fff;
 }
 
 #player-status-interface #player-status {
