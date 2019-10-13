@@ -7,11 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Operation Project Numero Uno</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
-        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -28,13 +26,6 @@
                 <button class="choice-button find-water">Find Water</button>
                 <button class="choice-button find-medicine">Find Medicine</button>
             </div>
-            <div id="player-status"></div>
-                <div>Name: <span id="name"></span></div>
-                <div>Health: <span id="health">10</span></div>
-                <div>Hunger: <span id="hunger">0</span></div>
-                <div>Thirst: <span id="thirst">0</span></div>
-            </div>
-
             <footer id="player-status-interface">
                 <div id="player-status" class="container">
                     <div class="status-item"><i class="fas fa-heart"></i> Health: <span id="health">10</span></div>
@@ -47,7 +38,6 @@
 </body>
 <script src="index.js"></script>
 <script>
-
     class DB {
         constructor() {
             this.storage = window.localStorage;
@@ -127,43 +117,43 @@
 
     // Setup a player object
     class Player {
-        constructor(name){
+        constructor(name) {
             this.name = name,
-            this.hunger = 0,
-            this.thirst = 0,
-            this.health = 10,
-            this.eat = this.eat.bind(this),
-            this.drink = this.drink.bind(this),
-            this.hungry = this.hungry.bind(this)
+                this.hunger = 0,
+                this.thirst = 0,
+                this.health = 10,
+                this.eat = this.eat.bind(this),
+                this.drink = this.drink.bind(this),
+                this.hungry = this.hungry.bind(this)
             this.heal = this.heal.bind(this),
-            this.damage = this.damage.bind(this)
+                this.damage = this.damage.bind(this)
         }
 
         //Add player methods
 
         //EAT
-        eat(num){
-            this.hunger-=num
+        eat(num) {
+            this.hunger -= num
         }
 
         //HUNGER
         hungry(num) {
-            this.hunger+=1
+            this.hunger += 1
         }
 
         //DRINK
-        drink(num){
-            this.thirst-=num
+        drink(num) {
+            this.thirst -= num
         }
 
         //HEAL
-        heal(num){
-            this.health+=num
+        heal(num) {
+            this.health += num
         }
 
         //TAKE DAMAGE
-        damage(num){
-            this.health-=num
+        damage(num) {
+            this.health -= num
         }
 
     }
@@ -173,7 +163,7 @@
     console.log(player)
 
     // Adjust points on location change
-    $('.choice-button').on('click', function () {
+    $('.choice-button').on('click', function() {
         // subtract health if hunger or thirst are too high
         if (player.hunger > 8) {
             player.damage(1);
