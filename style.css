@@ -20,6 +20,25 @@
     font-family: 'Metal Mania', cursive;
 }
 
+#choices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.choice-button {
+    width: 200px;
+    height: 4em;
+    margin: 1em;
+    border: none;
+    outline: none;
+    border-radius: .25em;
+    box-shadow: 4px 4px 10px #000000;
+    font-family: 'Metal Mania', cursive;
+    color: #ffffff;
+    background-color: #1bb741;
+}
+
 
 /* Footer Scoring Interface */
 
@@ -32,8 +51,9 @@
     /* proportions */
     height: 3em;
     /* colors borders & shading */
-    border-top: 1px solid #787878;
-    background: #fff;
+    border-top: 1px solid red;
+    background: linear-gradient( rgb(67, 67, 67), rgb(25, 25, 25));
+    color: #fff;
 }
 
 #player-status-interface #player-status {
