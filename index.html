@@ -28,6 +28,7 @@
             </div>
             <footer id="player-status-interface">
                 <div id="player-status" class="container">
+                    <div class="status-item"><i class="fas fa-user"></i> Name: <span id="name"></span></div>
                     <div class="status-item"><i class="fas fa-heart"></i> Health: <span id="health">10</span></div>
                     <div class="status-item"><i class="fas fa-drumstick-bite"></i> Hunger: <span id="hunger">0</span></div>
                     <div class="status-item"><i class="fas fa-tint-slash"></i> Thirst: <span id="thirst">0</span></div>
@@ -124,8 +125,8 @@
                 this.health = 10,
                 this.eat = this.eat.bind(this),
                 this.drink = this.drink.bind(this),
-                this.hungry = this.hungry.bind(this)
-            this.heal = this.heal.bind(this),
+                this.hungry = this.hungry.bind(this),
+                this.heal = this.heal.bind(this),
                 this.damage = this.damage.bind(this)
         }
 
@@ -161,6 +162,13 @@
     let player = new Player('Frank')
 
     console.log(player)
+
+    $(document).ready(function() {
+        $("#name").text(player.name)
+        $("#health").text(player.health);
+        $("#hunger").text(player.hunger);
+        $("#thirst").text(player.thirst);
+    });
 
     // Adjust points on location change
     $('.choice-button').on('click', function() {
