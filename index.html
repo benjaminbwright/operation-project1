@@ -20,21 +20,25 @@
             <div class="jumbotron text-center">
                 <h1>Forbade</h1>
                 <h3>Make use of what's left of your world!</h3>
+                <form id="start-game">
+                    <input id="name-input" type="text" placeholder="Enter name to play">
+                    <button type="submit">Play Game</button>
+                </form>
             </div>
         </div>
         <div class="container">
-            <div id="turn-info">
+            <div id="turn-info" class="hidden">
                 <p>You wake up and rub the sleep out of your eyes. From the morning light cascading through your window, the empty pizza box on your table, and the clothes laying around your apartment in heaps you could almost believe that life were going
                     on as normal. But, you know outside the world you knew is slipping into decay, and you spent as long as you can clinging to your old life. You're hunger and thirst demand that you embrace reality and begin your journey to find a more
                     stable place to begin your new life. You grab your bag, unlock your apartment door and head out to the streets to find what you can from the frightening new landscape you used to call home.
                 </p>
             </div>
-            <div id="choices">
+            <div id="choices" class="hidden">
                 <button class="choice-button find-food">Find Food</button>
                 <button class="choice-button find-water">Find Water</button>
                 <button class="choice-button find-medicine">Find Medicine</button>
             </div>
-            <footer id="player-status-interface">
+            <footer id="player-status-interface" class="hidden">
                 <div id="player-status" class="container">
                     <div class="status-item"><i class="fas fa-user"></i> <span id="name"></span></div>
                     <div class="status-item"><i class="fas fa-heart"></i> <span id="health">10</span></div>
@@ -174,7 +178,12 @@
 
 
     let Game = {
-        player: new Player('Frank'),
+        player: {
+            name: undefined,
+            thirst: 0,
+            hunger: 0,
+            health: 10
+        },
         location: {
             coordinates: {
                 lat: 0.0,
@@ -191,15 +200,28 @@
             }
         },
         updateDisplay: function() {
-            $("#name").text(this.player.name)
-            $("#health").text(this.player.health);
-            $("#hunger").text(this.player.hunger);
-            $("#thirst").text(this.player.thirst);
+            if (this.player.name) {
+                $("#choices").removeClass('hidden');
+                $("#player-status-interface").removeClass('hidden');
+                $("#turn-info").removeClass('hidden');
+                $("#name").text(this.player.name);
+                $("#health").text(this.player.health);
+                $("#hunger").text(this.player.hunger);
+                $("#thirst").text(this.player.thirst);
+            }
         }
     }
 
     $(document).ready(function() {
         Game.updateDisplay();
+    });
+
+    $('#start-game').on("submit", function(event) {
+        event.preventDefault();
+        userName = $("#name-input", this).val().trim();
+        Game.player = new Player(userName);
+        Game.updateDisplay();
+        $(this).hide();
     });
 
     // Adjust points on location change
