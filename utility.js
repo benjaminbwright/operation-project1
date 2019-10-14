@@ -14,7 +14,7 @@ let playerChoice;
 // 40.7076864
 // -73.9950592
 // test
-const initialize = () => {
+function initialize() {
    
   // var locale = new google.maps.LatLng(-33.867, 151.195);
   let startingPosition
@@ -56,14 +56,14 @@ const callback = (results, status) => {
 
       const place = results[i];
       // let rNum = randomizer(3)
-      // randomLocations.push(results)
+      randomLocations.push(results)
       console.log(place)
       console.log(place.name)
       // console.log(place.geometry.location)
       // console.log(place.geometry.location.lat())
       // console.log(place.geometry.location.lng())
-      return place
     }
+    return randomLocations
   }
 }
 
@@ -138,4 +138,18 @@ const updatePosition = (playerChoice, oldLocation) => {
 //   }
 // })()
 
+document.addEventListener("DOMContentLoaded", (event)=> {
+  console.log("Dom loaded and parsed")
+//   document.getElementById("utility").nextSibling += `<script async defer type="text/javascript"
+//     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFj9lWkNT5V5MSwgUkJRF3yoCClPHO3eM&libraries=places&callback=initialize">
+// </script>`
+  let googleScript = document.createElement("script")
+  googleScript.type = "text/javascript"
+  googleScript.src = `https://maps.googleapis.com/maps/api/js?key=${api_key}&libraries=places&callback=initialize`
+  
+  let a = $('script')[2]
 
+  let parentT = a.parentNode
+
+  parentT.insertBefore(googleScript, a)
+})
