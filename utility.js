@@ -2,6 +2,14 @@
  * gets geolocation of the browser
  */
 
+
+
+
+// convert miles to km for google
+// 1 * 1609.34 = km
+// location lat/long
+
+
 // INITIAL LOCATION
 const initialLocation = () => {
   // Checks for geolocation api 
@@ -16,6 +24,7 @@ const initialLocation = () => {
         latitude,
         longitude
       }
+      console.log(startingPosition)
       return startingPosition
     })
   } else {
@@ -25,6 +34,7 @@ const initialLocation = () => {
     })
   }
 }
+
 
 // Takes starting position 
 // scans in an area
@@ -36,36 +46,19 @@ const initialLocation = () => {
  * }
  */
 // GETS NEW LOCATION
-const newLocation = ((startPosition, playerDecision ) => {
 
-  switch (playerDecision) {
-    case 'food':
-      sanitizeData(playerDecision)
-      break;
-    case 'water':
-      sanitizeData(playerDecision)      
-      break;
-    case 'meds':
-      sanitizeData(playerDecision)      
-      break;
-    default:
-      
-  }
-
-  console.log('testing function')
-})()
 
 
 
 // AJAX CALL FOR AVAILABLE PLACES
 const sanitizeData = (choice) => {
-      const choiceOfLocations = []
-      let newPosition = ''
+    const choiceOfLocations = []
+    let newPosition = ''
     // takes choice
     // ajax call places api to populate the array
     // if (choice > 10) {slice it down to 10}
     // push all choice into locationsArray
-    
+ 
     // create a random index to return 
     // randomizer(choiceOfLocations.length)
 
@@ -73,11 +66,37 @@ const sanitizeData = (choice) => {
     // Returns an location object with lat and long
 }
 
+// sanitizeData()
+
 // RANDOM NUMBER GENERATOR
-const randomizer = (numOfLocations) => {
-  return Math.floor(Math.random() * Math.floor(numOfLocations));
-}
+
 // randomize a number 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
