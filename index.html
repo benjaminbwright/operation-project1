@@ -141,7 +141,12 @@
 
         //HUNGER
         hungry(num) {
-            this.hunger += 1
+            this.hunger += num
+        }
+
+        //THIRSTY
+        thirsty(num) {
+            this.thirst += num
         }
 
         //DRINK
@@ -178,15 +183,17 @@
             if (nearbyResources.length != -1) {
                 console.log("Do stuff");
             }
+        },
+        updateDisplay: function() {
+            $("#name").text(this.player.name)
+            $("#health").text(this.player.health);
+            $("#hunger").text(this.player.hunger);
+            $("#thirst").text(this.player.thirst);
         }
     }
 
-
     $(document).ready(function() {
-        $("#name").text(Game.player.name)
-        $("#health").text(Game.player.health);
-        $("#hunger").text(Game.player.hunger);
-        $("#thirst").text(Game.player.thirst);
+        Game.updateDisplay();
     });
 
     // Adjust points on location change
@@ -200,8 +207,8 @@
         }
 
         // Default hunger and thirst updates
-        Game.player.eat(1);
-        Game.player.drink(2)
+        Game.player.hungry(1);
+        Game.player.thirsty(2)
 
         if ($(this).hasClass("find-food")) {
             if (Game.player.hunger > 0) {
@@ -227,10 +234,7 @@
 
 
         // Update display
-        $("#name").text(Game.player.name)
-        $("#health").text(Game.player.health);
-        $("#hunger").text(Game.player.hunger);
-        $("#thirst").text(Game.player.thirst);
+        Game.updateDisplay();
     });
 </script>
 
