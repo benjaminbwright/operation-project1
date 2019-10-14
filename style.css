@@ -1,3 +1,14 @@
+/* Base Styles */
+
+.body {
+    color: #ffffff;
+}
+
+p {
+    color: #ffffff;
+}
+
+
 /* Header Styles */
 
 
@@ -29,6 +40,7 @@
 @media screen and (min-width: 768px) {
     #choices {
         flex-direction: row;
+        justify-content: center;
     }
 }
 
