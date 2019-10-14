@@ -31,11 +31,18 @@
             </div>
         </div>
         <div class="container">
+            <p id="intro-text">You wake up and rub the sleep out of your eyes. From the morning light cascading through your window, the empty pizza box on your table, and the clothes laying around your apartment in heaps you could almost believe that life were going on
+                as normal. But, you know outside the world you knew is slipping into decay, and you spent as long as you can clinging to your old life. You're hunger and thirst demand that you embrace reality and begin your journey to find a more stable
+                place to begin your new life. You grab your bag, unlock your apartment door and head out to the streets to find what you can from the frightening new landscape you used to call home.
+            </p>
             <div id="turn-info" class="hidden">
-                <p>You wake up and rub the sleep out of your eyes. From the morning light cascading through your window, the empty pizza box on your table, and the clothes laying around your apartment in heaps you could almost believe that life were going
-                    on as normal. But, you know outside the world you knew is slipping into decay, and you spent as long as you can clinging to your old life. You're hunger and thirst demand that you embrace reality and begin your journey to find a more
-                    stable place to begin your new life. You grab your bag, unlock your apartment door and head out to the streets to find what you can from the frightening new landscape you used to call home.
-                </p>
+                <!-- Required to use google places on client side -->
+                <div id="map-container">
+                    <div id="map"></div>
+                </div>
+                <div id="location-info">
+                    <p>You are somewhere. Find some water or food so your hunger and thirst don't bring you down.</p>
+                </div>
             </div>
             <div id="choices" class="hidden">
                 <button class="choice-button find-food">Find Food</button>
@@ -65,8 +72,6 @@
         </div>
     </div>
 </body>
-<!-- Required to use google places on client side -->
-<div id="map"></div>
 <script id="utility" src="utility.js"></script>
 <script src="secret.js"></script>
 <script src="index.js"></script>
@@ -224,6 +229,7 @@
                 $("#choices").removeClass('hidden');
                 $("#player-status-interface").removeClass('hidden');
                 $("#turn-info").removeClass('hidden');
+                $("#intro-text").addClass('hidden');
                 $("#name").text(this.player.name);
                 $("#health .progress-bar").attr("aria-valuenow", this.player.health);
                 $("#hunger .progress-bar").attr("aria-valuenow", this.player.hunger);

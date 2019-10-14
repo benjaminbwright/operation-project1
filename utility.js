@@ -80,7 +80,8 @@ const updatePosition = (playerChoice, oldLocation) => {
 
    map = new google.maps.Map(document.getElementById('map'), {
      center: locale,
-     zoom: 15
+     zoom: 15,
+     disableDefaultUI: true
    });
 
 

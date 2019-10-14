@@ -77,6 +77,20 @@ input[type=text] {
     height: 2em;
 }
 
+#turn-info {
+    display: flex;
+    flex-direction: row;
+}
+
+#map-container {
+    height: 16em;
+    width: 20em;
+}
+
+#map {
+    height: 100%;
+}
+
 
 /* Footer Scoring Interface */
 
