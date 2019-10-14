@@ -50,3 +50,8 @@ player
   
 
 */
+
+
+
+// FUNCTION TO CALCULATE FOOD/WATER/MED SCORE
+// getLocationScore()
