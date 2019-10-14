@@ -4,7 +4,7 @@ var infowindow;
 
 // 40.7076864
 // -73.9950592
-
+// test
 function initialize() {
    
   // var locale = new google.maps.LatLng(-33.867, 151.195);
