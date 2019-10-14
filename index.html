@@ -19,7 +19,7 @@
         <div class="container-fluid">
             <div class="jumbotron text-center">
                 <h1>Forbade</h1>
-                <p>Charlie, Frank, and Ben bring you the apocalypse.</p>
+                <p>Make use of what's left of your world!</p>
             </div>
         </div>
         <div class="container">
@@ -147,7 +147,12 @@
 
         //HUNGER
         hungry(num) {
-            this.hunger += 1
+            this.hunger += num
+        }
+
+        //THIRSTY
+        thirsty(num) {
+            this.thirst += num
         }
 
         //DRINK
@@ -167,59 +172,75 @@
 
     }
 
-    let player = new Player('Frank')
 
-    console.log(player)
+    let Game = {
+        player: new Player('Frank'),
+        location: {
+            coordinates: {
+                lat: 0.0,
+                lng: 0.0
+            },
+            nearbyResources: [],
+            foodScore: 3,
+            waterScore: 3,
+            medScore: 3
+        },
+        getlocScores: function() {
+            if (nearbyResources.length != -1) {
+                console.log("Do stuff");
+            }
+        },
+        updateDisplay: function() {
+            $("#name").text(this.player.name)
+            $("#health").text(this.player.health);
+            $("#hunger").text(this.player.hunger);
+            $("#thirst").text(this.player.thirst);
+        }
+    }
 
     $(document).ready(function() {
-        $("#name").text(player.name)
-        $("#health").text(player.health);
-        $("#hunger").text(player.hunger);
-        $("#thirst").text(player.thirst);
+        Game.updateDisplay();
     });
 
     // Adjust points on location change
     $('.choice-button').on('click', function() {
         // subtract health if hunger or thirst are too high
-        if (player.hunger > 8) {
-            player.damage(1);
+        if (Game.player.hunger > 8) {
+            Game.player.damage(1);
         }
-        if (player.thirst > 8) {
-            player.damage(1);
+        if (Game.player.thirst > 8) {
+            Game.player.damage(1);
         }
 
         // Default hunger and thirst updates
-        player.eat(1);
-        player.drink(2)
+        Game.player.hungry(1);
+        Game.player.thirsty(2)
 
         if ($(this).hasClass("find-food")) {
-            if (player.hunger > 0) {
-                player.eat(3);
+            if (Game.player.hunger > 0) {
+                Game.player.eat(3);
             }
-            if (player.hunger < 1) {
-                player.hunger = 0;
+            if (Game.player.hunger < 1) {
+                Game.player.hunger = 0;
             }
         }
 
         if ($(this).hasClass("find-water")) {
-            if (player.thirst > 0) {
-                player.drink(3);
+            if (Game.player.thirst > 0) {
+                Game.player.drink(3);
             }
-            if (player.thirst < 1) {
-                player.thirst = 0;
+            if (Game.player.thirst < 1) {
+                Game.player.thirst = 0;
             }
         }
 
         if ($(this).hasClass("find-medicine")) {
-            player.heal(3);
+            Game.player.heal(3);
         }
 
 
         // Update display
-        $("#name").text(player.name)
-        $("#health").text(player.health);
-        $("#hunger").text(player.hunger);
-        $("#thirst").text(player.thirst);
+        Game.updateDisplay();
     });
 </script>
 
