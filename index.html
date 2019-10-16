@@ -160,6 +160,16 @@
                 this.hunger = 0,
                 this.thirst = 0,
                 this.health = 10,
+                this.location = {
+                    coordinates: {
+                        lat: 0.0,
+                        lng: 0.0
+                    },
+                    nearbyResources: [],
+                    foodScore: 3,
+                    waterScore: 3,
+                    medScore: 3
+                },
                 this.eat = this.eat.bind(this),
                 this.drink = this.drink.bind(this),
                 this.hungry = this.hungry.bind(this),
@@ -199,102 +209,85 @@
             this.health -= num
         }
 
+        getLocScores() {
+            console.log("do some stuff");
+        }
+
     }
 
+    let player = new Player('');
 
-    let Game = {
-        player: {
-            name: undefined,
-            thirst: 0,
-            hunger: 0,
-            health: 10
-        },
-        location: {
-            coordinates: {
-                lat: 0.0,
-                lng: 0.0
-            },
-            nearbyResources: [],
-            foodScore: 3,
-            waterScore: 3,
-            medScore: 3
-        },
-        getlocScores: function() {
-            if (nearbyResources.length != -1) {
-                console.log("Do stuff");
-            }
-        },
-        updateDisplay: function() {
-            if (this.player.name) {
-                $("#choices").removeClass('hidden');
-                $("#player-status-interface").removeClass('hidden');
-                $("#turn-info").removeClass('hidden');
-                $("#intro-text").addClass('hidden');
-                $("#name").text(this.player.name);
-                $("#health .progress-bar").attr("aria-valuenow", this.player.health);
-                $("#hunger .progress-bar").attr("aria-valuenow", this.player.hunger);
-                $("#thirst .progress-bar").attr("aria-valuenow", this.player.thirst);
-                $(".status-item").each(function() {
-                    let valueNow = $(".progress-bar", this).attr("aria-valuenow");
-                    let total = $(".progress-bar", this).attr("aria-valuemax");
-                    let percent = (valueNow / total) * 100;
-                    $(".progress-bar", this).attr("style", "width: " + percent + "%;");
-                });
-            }
+    function updateDisplay() {
+        if (player.name) {
+            $("#choices").removeClass('hidden');
+            $("#player-status-interface").removeClass('hidden');
+            $("#turn-info").removeClass('hidden');
+            $("#intro-text").addClass('hidden');
+            $("#name").text(player.name);
+            $("#health .progress-bar").attr("aria-valuenow", player.health);
+            $("#hunger .progress-bar").attr("aria-valuenow", player.hunger);
+            $("#thirst .progress-bar").attr("aria-valuenow", player.thirst);
+            $(".status-item").each(function() {
+                let valueNow = $(".progress-bar", this).attr("aria-valuenow");
+                let total = $(".progress-bar", this).attr("aria-valuemax");
+                let percent = (valueNow / total) * 100;
+                $(".progress-bar", this).attr("style", "width: " + percent + "%;");
+            });
         }
     }
 
     $(document).ready(function() {
-        Game.updateDisplay();
+        updateDisplay();
     });
 
     $('#start-game').on("submit", function(event) {
         event.preventDefault();
         userName = $("#name-input", this).val().trim();
-        Game.player = new Player(userName);
-        Game.updateDisplay();
+        player.name = userName;
+        console.log(player.location);
+        updateDisplay();
         $(this).hide();
     });
 
     // Adjust points on location change
     $('.choice-button').on('click', function() {
         // subtract health if hunger or thirst are too high
-        if (Game.player.hunger > 8) {
-            Game.player.damage(1);
+        if (player.hunger > 8) {
+            player.damage(1);
         }
-        if (Game.player.thirst > 8) {
-            Game.player.damage(1);
+        if (player.thirst > 8) {
+            player.damage(1);
         }
 
         // Default hunger and thirst updates
-        Game.player.hungry(1);
-        Game.player.thirsty(2)
+        player.hungry(1);
+        player.thirsty(2)
 
         if ($(this).hasClass("find-food")) {
-            if (Game.player.hunger > 0) {
-                Game.player.eat(3);
+            if (player.hunger > 0) {
+                player.eat(3);
             }
-            if (Game.player.hunger < 1) {
-                Game.player.hunger = 0;
+            if (player.hunger < 1) {
+                player.hunger = 0;
             }
         }
 
         if ($(this).hasClass("find-water")) {
-            if (Game.player.thirst > 0) {
-                Game.player.drink(3);
+            if (player.thirst > 0) {
+                player.drink(3);
             }
-            if (Game.player.thirst < 1) {
-                Game.player.thirst = 0;
+            if (player.thirst < 1) {
+                player.thirst = 0;
             }
         }
 
         if ($(this).hasClass("find-medicine")) {
-            Game.player.heal(3);
+            player.heal(3);
         }
 
 
         // Update display
-        Game.updateDisplay();
+        updateDisplay();
     });
 </script>
 
