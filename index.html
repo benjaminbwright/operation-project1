@@ -175,50 +175,6 @@
         $("#hunger").text(player.hunger);
         $("#thirst").text(player.thirst);
     });
-
-    // Adjust points on location change
-    $('.choice-button').on('click', function() {
-        // subtract health if hunger or thirst are too high
-        if (player.hunger > 8) {
-            player.damage(1);
-        }
-        if (player.thirst > 8) {
-            player.damage(1);
-        }
-
-        // Default hunger and thirst updates
-        player.eat(1);
-        player.drink(2)
-
-        if ($(this).hasClass("find-food")) {
-            if (player.hunger > 0) {
-                player.eat(3);
-            }
-            if (player.hunger < 1) {
-                player.hunger = 0;
-            }
-        }
-
-        if ($(this).hasClass("find-water")) {
-            if (player.thirst > 0) {
-                player.drink(3);
-            }
-            if (player.thirst < 1) {
-                player.thirst = 0;
-            }
-        }
-
-        if ($(this).hasClass("find-medicine")) {
-            player.heal(3);
-        }
-
-
-        // Update display
-        $("#name").text(player.name)
-        $("#health").text(player.health);
-        $("#hunger").text(player.hunger);
-        $("#thirst").text(player.thirst);
-    });
 </script>
 
 </html>

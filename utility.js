@@ -11,12 +11,8 @@ let map;
 let service;
 let infowindow;
 let playerChoice;
-// 40.7076864
-// -73.9950592
-// test
+
 function initialize() {
-   
-  // var locale = new google.maps.LatLng(-33.867, 151.195);
   let startingPosition
 
     // Checks for geolocation api 
@@ -48,22 +44,15 @@ const callback = (results, status) => {
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     const randomLocations = []
     for (let i = 0; i < 10; i++) {
-      
-      
       // PUSH TO GAME OBJECT
       // location.nearbyResponse : [{}]
-
-
       const place = results[i];
       // let rNum = randomizer(3)
       randomLocations.push(results)
-      console.log(place)
-      console.log(place.name)
-      // console.log(place.geometry.location)
-      // console.log(place.geometry.location.lat())
-      // console.log(place.geometry.location.lng())
     }
-    return randomLocations
+    randomPlace(randomLocations)
+    // return randomLocations
+
   }
 }
 
@@ -71,6 +60,22 @@ const randomizer = (numOfLocations) => {
   return Math.floor(Math.random() * Math.floor(numOfLocations));
 }
 
+
+const randomPlace = (placesArr) => {
+  // console.log(placesArr)
+  let num = randomizer(10)
+  // console.log(num)
+  let val = generateRandomValue(placesArr)
+  console.log(val)
+  let placesObj = placesArr[num]
+  console.log( [placesObj,val])
+  return [placesObj,val]
+}
+
+const generateRandomValue = (placesArr) => {
+  // Add logic to pick a value for the food/water/meds
+  return randomizer(placesArr.length)
+}
 
 const updatePosition = (playerChoice, oldLocation) => {
   // returns new position
@@ -82,8 +87,6 @@ const updatePosition = (playerChoice, oldLocation) => {
      center: locale,
      zoom: 15
    });
-
-
   /**
    * Types 
    * drugstore 
@@ -92,7 +95,6 @@ const updatePosition = (playerChoice, oldLocation) => {
    * hospital
    * hotel to heal
    */
-
    const request = {
      location: locale,
      // can't use floats 1609.34 is the conversion for meters
@@ -152,4 +154,50 @@ document.addEventListener("DOMContentLoaded", (event)=> {
   let parentT = a.parentNode
 
   parentT.insertBefore(googleScript, a)
+  // Adjust points on location change
+  $('.choice-button').on('click', function () {
+    // subtract health if hunger or thirst are too high
+    // if (Game.player.hunger > 8) {
+    //   Game.player.damage(1);
+    // }
+    // if (Game.player.thirst > 8) {
+    //   Game.player.damage(1);
+    // }
+
+    // // Default hunger and thirst updates
+    // Game.player.hungry(1);
+    // Game.player.thirsty(2)
+
+    // if ($(this).hasClass("find-food")) {
+    //   if (Game.player.hunger > 0) {
+    //     Game.player.eat(3);
+    //   }
+    //   if (Game.player.hunger < 1) {
+    //     Game.player.hunger = 0;
+    //   }
+    // }
+
+    // if ($(this).hasClass("find-water")) {
+    //   if (Game.player.thirst > 0) {
+    //     Game.player.drink(3);
+    //   }
+    //   if (Game.player.thirst < 1) {
+    //     Game.player.thirst = 0;
+    //   }
+    // }
+
+    if ($(this).hasClass("find-medicine")) {
+      // pass in some starting coordinates from player object
+      updatePosition('drugstore', 
+            {
+              latitude: 40.7117917,
+              longitude: -73.9901252
+            })
+      // Game.player.heal(3);
+    }
+
+
+    // Update display
+    // Game.updateDisplay();
+  });
 })
