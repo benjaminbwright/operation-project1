@@ -82,9 +82,14 @@ input[type=text] {
     flex-direction: row;
 }
 
+#location-info {
+    padding: 1em;
+}
+
 #map-container {
     height: 16em;
     width: 20em;
+    padding: 1em;
 }
 
 #map {
